@@ -1,32 +1,22 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import Axios from 'axios';
 
-export class PokemonDetail extends Component {
-  state = {
-    details: {},
-  };
+const PokemonDetail = props => {
+  const [details, setDetails] = useState({});
 
-  componentDidMount() {
-    const url = this.props.pokemon.url;
-    console.log(url);
-    Axios.get(url).then(res => this.setState({ details: res.data }));
-  }
+  useEffect(() => {
+    Axios.get(props.pokemon.url).then(res => setDetails(res.data));
+  }, [props.pokemon.url]);
 
-  render() {
-    console.log(this.props);
-
-    return (
-      <div>
-        <h1>{this.props.pokemon.name} </h1>
-        <div>{JSON.stringify(this.state.details['abilities'])}</div>
-      </div>
-    );
-  }
-}
-
-// PokemonListItem.propTypes = {
-//   pokemon: PropTypes.object.isRequired,
-// };
+  console.log(props);
+  console.log(details);
+  return (
+    <div>
+      <h1>{props.pokemon.name} </h1>
+      <div>{details?.height}</div>
+    </div>
+  );
+};
 
 export default PokemonDetail;

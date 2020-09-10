@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import PokemonList from './components/pages/PokemonList';
@@ -9,71 +9,63 @@ import Axios from 'axios';
 
 import './App.css';
 
-class App extends React.Component {
-  state = {
-    pokemonlist: [],
-    typelist: [],
-  };
+const App = props => {
+  const [pokemonlist, setPokemonList] = useState([]);
+  const [typelist, setTypeList] = useState([]);
 
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     Axios.get('https://pokeapi.co/api/v2/pokemon').then(res =>
-      this.setState({ pokemonlist: res.data.results })
+      setPokemonList(res.data.results)
     );
     Axios.get('https://pokeapi.co/api/v2/type').then(res =>
-      this.setState({ typelist: res.data.results })
+      setTypeList({ typelist: res.data.results })
     );
-  }
+  }, []);
 
-  render() {
-    return (
-      <BrowserRouter>
-        <div className='App'>
-          <div className='container'>
-            <Navbar />
-            <Route
-              exact
-              path={['/pokemons', '/']}
-              render={props => (
-                <React.Fragment>
-                  <PokemonList pokemonlist={this.state.pokemonlist} />
-                </React.Fragment>
-              )}
-            />
-            <Route
-              exact
-              path='/types'
-              render={props => (
-                <React.Fragment>
-                  <TypeList typelist={this.state.typelist} />
-                </React.Fragment>
-              )}
-            />
-            <Route
-              exact
-              path='/pokemons/:id'
-              render={props => {
-                console.log(props);
-                console.log(props.location);
-                const selectedIndex = props.match.params['id'];
-                const selectedPokemon = this.state.pokemonlist[selectedIndex];
+  let content = (
+    <BrowserRouter>
+      <div className='App'>
+        <div className='container'>
+          <Navbar />
+          <Route
+            exact
+            path={['/pokemons', '/']}
+            render={props => (
+              <React.Fragment>
+                <PokemonList pokemonlist={pokemonlist} />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path='/types'
+            render={props => (
+              <React.Fragment>
+                <TypeList typelist={typelist.typelist} />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path='/pokemons/:id'
+            render={props => {
+              console.log(props);
+              console.log(props.location);
+              const selectedIndex = props.match.params['id'];
+              const selectedPokemon = pokemonlist[selectedIndex];
 
-                return (
-                  <React.Fragment>
-                    <PokemonDetail pokemon={selectedPokemon} />
-                  </React.Fragment>
-                );
-              }}
-            />
-          </div>
+              return (
+                <React.Fragment>
+                  <PokemonDetail pokemon={selectedPokemon} />
+                </React.Fragment>
+              );
+            }}
+          />
         </div>
-      </BrowserRouter>
-    );
-  }
-}
+      </div>
+    </BrowserRouter>
+  );
+  return content;
+};
 
 export default App;
