@@ -32,7 +32,9 @@ const App = props => {
             path={['/pokemons', '/']}
             render={props => (
               <React.Fragment>
-                <PokemonList pokemonlist={pokemonlist} />
+                <div className='card-container'>
+                  <PokemonList pokemonlist={pokemonlist} />
+                </div>
               </React.Fragment>
             )}
           />

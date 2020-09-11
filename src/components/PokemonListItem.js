@@ -1,22 +1,33 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './card.css';
+import Axios from 'axios';
 
-export class PokemonListItem extends Component {
-  render() {
-    console.log(this.props);
-    return (
-      <div>
-        <Link to={`/pokemons/${this.props.index}`}>
-          {this.props.pokemon.name}
-        </Link>
+const PokemonListItem = props => {
+  const [details, setDetails] = useState({});
+
+  useEffect(() => {
+    Axios.get(props.pokemon.url).then(res => setDetails(res.data));
+  }, [props.pokemon.url]);
+
+  return (
+    <div className='card'>
+      <div className='card-sprite'>
+        <img src={details.sprites} alt='' />
       </div>
-    );
-  }
-}
-
-PokemonListItem.propTypes = {
-  pokemon: PropTypes.object.isRequired,
+      <Link className='card-name' to={`/pokemons/${props.index}`}>
+        {props.pokemon.name}
+      </Link>
+      <p className='card-height'>
+        <span>height: </span>
+        {details.height}
+      </p>
+      <p className='card-weight'>
+        <span>weight: </span>
+        {details.weight}
+      </p>
+    </div>
+  );
 };
 
 export default PokemonListItem;

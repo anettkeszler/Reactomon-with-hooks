@@ -9,14 +9,35 @@ const PokemonDetail = props => {
     Axios.get(props.pokemon.url).then(res => setDetails(res.data));
   }, [props.pokemon.url]);
 
-  console.log(props);
-  console.log(details);
   return (
-    <div>
+    <div style={detailStyle}>
       <h1>{props.pokemon.name} </h1>
-      <div>{details?.height}</div>
+      <div>
+        <p>
+          <span>Height: </span>
+          {details?.height}
+        </p>
+        <p>
+          <span>Weight: </span>
+          {details.weight}
+        </p>
+        <p>
+          <span>Weight: </span>
+          {details.baseExperiance}
+        </p>
+      </div>
     </div>
   );
+};
+
+const detailStyle = {
+  width: '300px',
+  height: '200px',
+  border: 'solid black 5px',
+  borderRadius: '9px',
+  backgroundColor: 'ivory',
+  textAlign: 'center',
+  margin: '10px',
 };
 
 export default PokemonDetail;

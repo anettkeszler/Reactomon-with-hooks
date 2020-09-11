@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom';
 function Navbar() {
   return (
     <header style={navbarStyle}>
-      <h1>Pokemon</h1>
       <Link style={linkStyle} to='/pokemons'>
         Pokemons
       </Link>
-      |
       <Link style={linkStyle} to='/types'>
         Types
       </Link>
@@ -16,18 +14,23 @@ function Navbar() {
   );
 }
 const navbarStyle = {
-  background: '#333',
+  height: '50px',
+  background: 'red',
   color: '#fff',
   textAlign: 'center',
   padding: '10px',
 };
 
 const linkStyle = {
-  backgroundColor: '#f44336',
+  backgroundColor: 'black',
   color: '#fff',
+  marginTop: '0px',
+  marginRight: '10px',
   textDecoration: 'none',
-  padding: '14px 25px',
+  padding: '5px',
   display: 'inline-block',
+  borderRadius: '10px',
+  width: '150px',
 };
 
 export default Navbar;
