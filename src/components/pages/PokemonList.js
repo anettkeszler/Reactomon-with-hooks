@@ -3,9 +3,7 @@ import PokemonListItem from '../PokemonListItem';
 
 const PokemonList = props => {
   const result = props.pokemonlist.map((pokemon, index) => (
-    <div>
-      <PokemonListItem pokemon={pokemon} index={index} />
-    </div>
+    <PokemonListItem pokemon={pokemon} index={index} />
   ));
   return result;
 };

@@ -10,14 +10,20 @@ const PokemonListItem = props => {
     Axios.get(props.pokemon.url).then(res => setDetails(res.data));
   }, [props.pokemon.url]);
 
+  // let image = '';
+  // if (details.sprites === undefined) {
+  //   image = <div>loading...</div>;
+  // } else {
+  //   image = <img src={details.sprites.front_default} alt='' />;
+  // }
+
   return (
-    <div className='card'>
+    <Link className='card' to={`/pokemons/${props.index}`}>
       <div className='card-sprite'>
-        <img src={details.sprites} alt='' />
+        {/* {image} */}
+        <img src={details.sprites?.front_shiny} alt='' />
       </div>
-      <Link className='card-name' to={`/pokemons/${props.index}`}>
-        {props.pokemon.name}
-      </Link>
+      <div className='card-name'>{props.pokemon.name}</div>
       <p className='card-height'>
         <span>height: </span>
         {details.height}
@@ -26,7 +32,7 @@ const PokemonListItem = props => {
         <span>weight: </span>
         {details.weight}
       </p>
-    </div>
+    </Link>
   );
 };
 

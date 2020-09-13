@@ -12,12 +12,13 @@ const TypeList = props => {
 
 const typeStyle = {
   width: '80px',
-  height: '20px',
+  height: '40px',
   border: 'solid black 1px',
   borderRadius: '9px',
   backgroundColor: 'rgba(252, 219, 3)',
   textAlign: 'center',
-  margin: '10px',
+  padding: '5px',
+  margin: '15px',
 };
 
 export default TypeList;

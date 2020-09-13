@@ -5,10 +5,10 @@ function Navbar() {
   return (
     <header style={navbarStyle}>
       <Link style={linkStyle} to='/pokemons'>
-        Pokemons
+        POKEMONS
       </Link>
       <Link style={linkStyle} to='/types'>
-        Types
+        TYPES
       </Link>
     </header>
   );

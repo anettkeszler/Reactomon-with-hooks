@@ -6,38 +6,50 @@ const PokemonDetail = props => {
   const [details, setDetails] = useState({});
 
   useEffect(() => {
-    Axios.get(props.pokemon.url).then(res => setDetails(res.data));
-  }, [props.pokemon.url]);
+    if (props.pokemon) {
+      Axios.get(props.pokemon.url).then(res => setDetails(res.data));
+    }
+  });
 
   return (
-    <div style={detailStyle}>
-      <h1>{props.pokemon.name} </h1>
-      <div>
-        <p>
-          <span>Height: </span>
-          {details?.height}
-        </p>
-        <p>
-          <span>Weight: </span>
-          {details.weight}
-        </p>
-        <p>
-          <span>Weight: </span>
-          {details.baseExperiance}
-        </p>
+    <div style={detailContainer}>
+      <div style={detailContent}>
+        <h1>{props.pokemon?.name} </h1>
+        <div>
+          <p>
+            <span>Height: </span>
+            {details.height}
+          </p>
+          <p>
+            <span>Weight: </span>
+            {details.weight}
+          </p>
+          <p>
+            {/* if details.types not undefined or null or falsy, then  */}
+            {details.types &&
+              details.types.map(type => {
+                return <span>{type.type.name}</span>;
+              })}
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
-const detailStyle = {
-  width: '300px',
-  height: '200px',
+const detailContent = {
+  width: '500px',
+  height: '300px',
   border: 'solid black 5px',
   borderRadius: '9px',
   backgroundColor: 'ivory',
   textAlign: 'center',
-  margin: '10px',
+  margin: 'auto',
+  marginTop: '30px',
+};
+
+const detailContainer = {
+  contentAlign: 'center',
 };
 
 export default PokemonDetail;

@@ -11,6 +11,8 @@ body {
   line-height: 1.4;
   background-image: url('./pokemon_background.jpeg');
   background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 a {
@@ -20,8 +22,8 @@ a {
 .card-container {
   width: 80%;
   display: grid;
-  margin: 0 auto;
-  padding: 0 auto;
+  margin: 0;
+  padding: 0;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 10px;
 }

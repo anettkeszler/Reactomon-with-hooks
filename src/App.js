@@ -51,11 +51,8 @@ const App = props => {
             exact
             path='/pokemons/:id'
             render={props => {
-              console.log(props);
-              console.log(props.location);
               const selectedIndex = props.match.params['id'];
               const selectedPokemon = pokemonlist[selectedIndex];
-
               return (
                 <React.Fragment>
                   <PokemonDetail pokemon={selectedPokemon} />
